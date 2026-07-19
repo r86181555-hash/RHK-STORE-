@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Account</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="login-box">
+
+<h1>Create Account</h1>
+
+<p class="subtitle">Join Instagram</p>
+
+<input
+type="text"
+id="fullname"
+placeholder="Full Name">
+
+<input
+type="text"
+id="username"
+placeholder="Username">
+
+<input
+type="file"
+id="profile">
+
+<div class="password-box">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<span id="togglePassword">👁</span>
+
+</div>
+
+<button id="signupBtn">
+Create Account
+</button>
+
+<p id="error"></p>
+
+<div class="divider"></div>
+
+<p class="signup">
+
+Already have an account?
+
+<a href="index.html">
+
+Login
+
+</a>
+
+</p>
+
+</div>
+
+<!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="signup.js"></script>
+
+</body>
+
+</html>
