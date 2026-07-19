@@ -1,87 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create RHK Account</title>
 
-<title>Create Account</title>
+<link rel="stylesheet" href="signup.css">
 
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 </head>
-
 <body>
 
-<div class="background"></div>
+<div class="container">
 
-<div class="login-box">
+    <button class="back-btn" onclick="history.back()">←</button>
 
-<h1>Create Account</h1>
+    <div class="logo">
+        <div class="logo-circle">
+            <h1>RHK</h1>
+        </div>
+    </div>
 
-<p class="subtitle">Join Instagram</p>
+    <h2>Create Account</h2>
 
-<input
-type="text"
-id="fullname"
-placeholder="Full Name">
+    <input
+        type="text"
+        id="username"
+        placeholder="Username">
 
-<input
-type="text"
-id="username"
-placeholder="Username">
+    <input
+        type="email"
+        id="email"
+        placeholder="Email Address">
 
-<input
-type="file"
-id="profile">
+    <input
+        type="password"
+        id="password"
+        placeholder="Password">
 
-<div class="password-box">
+    <button id="signupBtn">
+        Sign Up
+    </button>
 
-<input
-type="password"
-id="password"
-placeholder="Password">
+    <p class="login-text">
+        Already have an account?
 
-<span id="togglePassword">👁</span>
+        <a href="index.html">
+            Log In
+        </a>
 
-</div>
-
-<button id="signupBtn">
-Create Account
-</button>
-
-<p id="error"></p>
-
-<div class="divider"></div>
-
-<p class="signup">
-
-Already have an account?
-
-<a href="index.html">
-
-Login
-
-</a>
-
-</p>
+    </p>
 
 </div>
 
-<!-- Firebase -->
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-<script src="signup.js"></script>
+<script type="module" src="signup.js"></script>
 
 </body>
-
 </html>
