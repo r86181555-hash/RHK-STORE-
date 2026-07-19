@@ -1,67 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RHK Login</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 
-<title>Instagram Login</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<div class="background"></div>
+<div class="container">
 
-<div class="login-box">
+    <!-- Back Button -->
+    <div class="top-bar">
+        <button class="back-btn">&#8592;</button>
 
-<h1>Instagram</h1>
+        <select class="language">
+            <option>English (UK)</option>
+            <option>English (US)</option>
+            <option>Hindi</option>
+        </select>
+    </div>
 
-<p class="subtitle">Welcome Back</p>
+    <!-- Logo -->
+    <div class="logo-box">
+        <div class="logo-circle">
+            <h1>RHK</h1>
+        </div>
+    </div>
 
-<input
-type="text"
-id="username"
-placeholder="Username">
+    <!-- Login Form -->
+    <div class="login-box">
 
-<div class="password-box">
+        <input
+            type="text"
+            id="email"
+            placeholder="Username, email address or mobile number">
 
-<input
-type="password"
-id="password"
-placeholder="Password">
+        <input
+            type="password"
+            id="password"
+            placeholder="Password">
 
-<span id="togglePassword">👁</span>
+        <button id="loginBtn">
+            Log in
+        </button>
+
+        <a href="#" id="forgotPassword">
+            Forgotten password?
+        </a>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="bottom">
+
+        <button id="createAccount">
+            Create new account
+        </button>
+
+        <div class="meta">
+            <span>∞</span>
+            <p>Meta</p>
+        </div>
+
+    </div>
 
 </div>
 
-<button id="loginBtn">
-Login
-</button>
-
-<p id="error"></p>
-
-<div class="divider"></div>
-
-<p class="signup">
-
-Don't have an account?
-
-<a href="signup.html">
-
-Create Account
-
-</a>
-
-</p>
-
-</div>
-
-<script src="script.js"></script>
+<!-- Firebase -->
+<script type="module" src="script.js"></script>
 
 </body>
 </html>
