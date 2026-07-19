@@ -10,9 +10,15 @@ import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
+import {
+    getFirestore,
+    doc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
 
 // ==========================
-// Your Firebase Config
+// Firebase Config
 // ==========================
 const firebaseConfig = {
     apiKey: "AIzaSyAHUju18VBAdDFoQJhsVWp7oUqBxhfwThE",
@@ -30,13 +36,14 @@ const firebaseConfig = {
 // ==========================
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 
 // ==========================
 // HTML Elements
 // ==========================
-const email = document.getElementById("email");
-const password = document.getElementById("password");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
 
 const loginBtn = document.getElementById("loginBtn");
 const forgotPassword = document.getElementById("forgotPassword");
@@ -48,23 +55,39 @@ const createAccount = document.getElementById("createAccount");
 // ==========================
 loginBtn.addEventListener("click", async () => {
 
-    const emailValue = email.value.trim();
-    const passwordValue = password.value.trim();
+    let loginValue = emailInput.value.trim().toLowerCase();
+    let password = passwordInput.value.trim();
 
-    if (emailValue === "" || passwordValue === "") {
+    if (loginValue === "" || password === "") {
         alert("Please fill all fields.");
         return;
     }
 
     try {
 
+        let email = loginValue;
+
+        // If user entered username instead of email
+        if (!loginValue.includes("@")) {
+
+            const usernameDoc =
+                await getDoc(doc(db, "usernames", loginValue));
+
+            if (!usernameDoc.exists()) {
+                alert("Username not found.");
+                return;
+            }
+
+            email = usernameDoc.data().email;
+        }
+
         await signInWithEmailAndPassword(
             auth,
-            emailValue,
-            passwordValue
+            email,
+            password
         );
 
-        alert("Login Successful!");
+        alert("Welcome to RHK!");
 
         window.location.href = "home.html";
 
@@ -84,16 +107,29 @@ forgotPassword.addEventListener("click", async (e) => {
 
     e.preventDefault();
 
-    const emailValue = email.value.trim();
+    let loginValue = emailInput.value.trim().toLowerCase();
 
-    if (emailValue === "") {
-        alert("Enter your email first.");
+    if (loginValue === "") {
+        alert("Enter your email.");
         return;
     }
 
     try {
 
-        await sendPasswordResetEmail(auth, emailValue);
+        if (!loginValue.includes("@")) {
+
+            const usernameDoc =
+                await getDoc(doc(db, "usernames", loginValue));
+
+            if (!usernameDoc.exists()) {
+                alert("Username not found.");
+                return;
+            }
+
+            loginValue = usernameDoc.data().email;
+        }
+
+        await sendPasswordResetEmail(auth, loginValue);
 
         alert("Password reset email sent.");
 
@@ -107,7 +143,7 @@ forgotPassword.addEventListener("click", async (e) => {
 
 
 // ==========================
-// Create Account Button
+// Create Account
 // ==========================
 createAccount.addEventListener("click", () => {
 
