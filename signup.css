@@ -1,0 +1,137 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Roboto',sans-serif;
+}
+
+body{
+    background:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+}
+
+.back-btn{
+    width:45px;
+    height:45px;
+    border:none;
+    background:none;
+    font-size:32px;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+.logo{
+    display:flex;
+    justify-content:center;
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+.logo-circle{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff0066,#ff7b00,#ffd500,#7a2cff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.logo-circle h1{
+    font-size:34px;
+    letter-spacing:2px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:35px;
+    font-size:30px;
+    color:#222;
+}
+
+input{
+    width:100%;
+    height:60px;
+    border:1px solid #ddd;
+    border-radius:18px;
+    padding:0 18px;
+    font-size:18px;
+    margin-bottom:18px;
+    outline:none;
+    transition:.3s;
+}
+
+input:focus{
+    border-color:#1877f2;
+}
+
+#signupBtn{
+    width:100%;
+    height:60px;
+    border:none;
+    border-radius:35px;
+    background:#1877f2;
+    color:white;
+    font-size:22px;
+    font-weight:500;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#signupBtn:hover{
+    background:#166fe5;
+}
+
+.login-text{
+    text-align:center;
+    margin-top:25px;
+    font-size:18px;
+    color:#444;
+}
+
+.login-text a{
+    color:#1877f2;
+    text-decoration:none;
+    font-weight:600;
+}
+
+@media(max-width:430px){
+
+.logo-circle{
+    width:95px;
+    height:95px;
+}
+
+.logo-circle h1{
+    font-size:30px;
+}
+
+h2{
+    font-size:26px;
+}
+
+input{
+    height:58px;
+    font-size:17px;
+}
+
+#signupBtn{
+    height:58px;
+    font-size:21px;
+}
+
+}
