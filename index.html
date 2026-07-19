@@ -1,248 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Instagram</title>
+<title>Instagram Login</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Poppins:wght@300;400;500;600&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-<!-- LOADER -->
+<div class="background"></div>
 
-<div id="loader">
-
-<div class="spinner"></div>
-
-</div>
-
-<!-- TOP -->
-
-<header class="topBar">
-
-<div class="logo">
+<div class="login-box">
 
 <h1>Instagram</h1>
 
-<i class="fa-solid fa-angle-down"></i>
+<p class="subtitle">Welcome Back</p>
+
+<input
+type="text"
+id="username"
+placeholder="Username">
+
+<div class="password-box">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<span id="togglePassword">👁</span>
 
 </div>
 
-<div class="topIcons">
-
-<button id="addPost">
-
-<i class="fa-regular fa-square-plus"></i>
-
+<button id="loginBtn">
+Login
 </button>
 
-<button id="heart">
+<p id="error"></p>
 
-<i class="fa-regular fa-heart"></i>
+<div class="divider"></div>
 
-</button>
+<p class="signup">
 
-<button id="chat">
+Don't have an account?
 
-<i class="fa-regular fa-paper-plane"></i>
+<a href="signup.html">
 
-</button>
+Create Account
 
-</div>
-
-</header>
-
-<!-- STORIES -->
-
-<section class="storyArea">
-
-<div class="storyScroll">
-
-<div class="story me">
-
-<div class="storyImage">
-
-<img
-id="myPhoto"
-src="images/default.png">
-
-<div class="plus">
-
-<i class="fa-solid fa-plus"></i>
-
-</div>
-
-</div>
-
-<p>Your Story</p>
-
-</div>
-
-<div id="stories"></div>
-
-</div>
-
-</section>
-
-<!-- POSTS -->
-
-<main id="feed">
-
-<div class="emptyFeed">
-
-<i class="fa-regular fa-image"></i>
-
-<h2>No Posts Yet</h2>
-
-<p>
-
-When users create accounts and upload posts,
-they will automatically appear here.
+</a>
 
 </p>
 
 </div>
 
-</main>
-<!-- ========================= -->
-<!-- CREATE POST POPUP -->
-<!-- ========================= -->
-
-<div class="uploadPopup" id="uploadPopup">
-
-    <div class="uploadCard">
-
-        <div class="uploadHeader">
-
-            <h2>Create New Post</h2>
-
-            <button id="closeUpload">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-        </div>
-
-        <div class="uploadBody">
-
-            <label class="uploadBox">
-
-                <input
-                    type="file"
-                    id="postFile"
-                    accept="image/*,video/*"
-                    hidden>
-
-                <i class="fa-solid fa-photo-film"></i>
-
-                <h3>Select Photo or Video</h3>
-
-                <p>Choose from your device</p>
-
-            </label>
-
-            <div id="preview"></div>
-
-            <textarea
-                id="caption"
-                placeholder="Write a caption..."></textarea>
-
-            <button id="sharePost">
-                Share
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ========================= -->
-<!-- STORY VIEWER -->
-<!-- ========================= -->
-
-<div id="storyViewer">
-
-    <button id="closeStory">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-
-    <div class="storyContent">
-
-        <img
-            id="storyImage"
-            hidden>
-
-        <video
-            id="storyVideo"
-            controls
-            playsinline
-            hidden>
-        </video>
-
-    </div>
-
-</div>
-
-<!-- ========================= -->
-<!-- BOTTOM NAVIGATION -->
-<!-- ========================= -->
-
-<nav class="bottomNav">
-
-    <button id="homeBtn" class="active">
-        <i class="fa-solid fa-house"></i>
-    </button>
-
-    <button id="searchBtn">
-        <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
-
-    <button id="reelsBtn">
-        <i class="fa-solid fa-clapperboard"></i>
-    </button>
-
-    <button id="notificationBtn">
-        <i class="fa-regular fa-heart"></i>
-    </button>
-
-    <button id="profileBtn">
-
-        <img
-            id="bottomProfile"
-            src="images/default.png">
-
-    </button>
-
-</nav>
-
-<!-- ========================= -->
-<!-- TOAST -->
-<!-- ========================= -->
-
-<div id="toast"></div>
-
-<script type="module" src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
