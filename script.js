@@ -1,93 +1,130 @@
-// ===============================
-// Firebase Configuration
-// ===============================
+// ==========================
+// Firebase Imports
+// ==========================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+
+// ==========================
+// Your Firebase Config
+// ==========================
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyAHUju18VBAdDFoQJhsVWp7oUqBxhfwThE",
+    authDomain: "rhk-app-e34c6.firebaseapp.com",
+    projectId: "rhk-app-e34c6",
+    storageBucket: "rhk-app-e34c6.firebasestorage.app",
+    messagingSenderId: "1016565109006",
+    appId: "1:1016565109006:web:eb7ec260a601a16e5ac75f",
+    measurementId: "G-814PTRRQVQ"
 };
 
+
+// ==========================
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// ==========================
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-const auth = firebase.auth();
-const db = firebase.firestore();
 
-// ===============================
-// Show / Hide Password
-// ===============================
-
-const togglePassword = document.getElementById("togglePassword");
+// ==========================
+// HTML Elements
+// ==========================
+const email = document.getElementById("email");
 const password = document.getElementById("password");
 
-togglePassword.onclick = () => {
-
-    if(password.type==="password"){
-        password.type="text";
-        togglePassword.innerHTML="🙈";
-    }else{
-        password.type="password";
-        togglePassword.innerHTML="👁";
-    }
-
-};
-
-// ===============================
-// Login
-// ===============================
-
 const loginBtn = document.getElementById("loginBtn");
+const forgotPassword = document.getElementById("forgotPassword");
+const createAccount = document.getElementById("createAccount");
 
-loginBtn.onclick = async ()=>{
 
-    const username=document.getElementById("username").value.trim();
+// ==========================
+// Login
+// ==========================
+loginBtn.addEventListener("click", async () => {
 
-    const pass=password.value;
+    const emailValue = email.value.trim();
+    const passwordValue = password.value.trim();
 
-    const error=document.getElementById("error");
-
-    error.innerHTML="";
-
-    if(username===""||pass===""){
-
-        error.innerHTML="Please fill all fields.";
-
+    if (emailValue === "" || passwordValue === "") {
+        alert("Please fill all fields.");
         return;
+    }
+
+    try {
+
+        await signInWithEmailAndPassword(
+            auth,
+            emailValue,
+            passwordValue
+        );
+
+        alert("Login Successful!");
+
+        window.location.href = "home.html";
+
+    } catch (error) {
+
+        alert(error.message);
 
     }
 
-    try{
+});
 
-        // Search username in Firestore
 
-        const snapshot=await db.collection("users")
-        .where("username","==",username)
-        .get();
+// ==========================
+// Forgot Password
+// ==========================
+forgotPassword.addEventListener("click", async (e) => {
 
-        if(snapshot.empty){
+    e.preventDefault();
 
-            error.innerHTML="Username not found.";
+    const emailValue = email.value.trim();
 
-            return;
+    if (emailValue === "") {
+        alert("Enter your email first.");
+        return;
+    }
 
-        }
+    try {
 
-        const user=snapshot.docs[0].data();
+        await sendPasswordResetEmail(auth, emailValue);
 
-        // Hidden email used for Firebase Auth
+        alert("Password reset email sent.");
 
-        await auth.signInWithEmailAndPassword(user.email,pass);
+    } catch (error) {
 
-        window.location.href="home.html";
-
-    }catch(e){
-
-        error.innerHTML="Invalid username or password.";
+        alert(error.message);
 
     }
 
-};
+});
+
+
+// ==========================
+// Create Account Button
+// ==========================
+createAccount.addEventListener("click", () => {
+
+    window.location.href = "signup.html";
+
+});
+
+
+// ==========================
+// Auto Login
+// ==========================
+onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+
+        window.location.href = "home.html";
+
+    }
+
+});
