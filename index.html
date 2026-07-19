@@ -1,77 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RHK Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>RHK Login</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import {
+getAuth
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyAHUju18VBAdDFoQJhsVWp7oUqBxhfwThE",
+authDomain: "rhk-app-e34c6.firebaseapp.com",
+projectId: "rhk-app-e34c6",
+storageBucket: "rhk-app-e34c6.firebasestorage.app",
+messagingSenderId: "1016565109006",
+appId: "1:1016565109006:web:eb7ec260a601a16e5ac75f",
+measurementId: "G-814PTRRQVQ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.auth = auth;
+
+</script>
+
 </head>
+
 <body>
 
 <div class="container">
 
-    <!-- Back Button -->
-    <div class="top-bar">
-        <button class="back-btn">&#8592;</button>
+<div class="language">
+English (UK)
+</div>
 
-        <select class="language">
-            <option>English (UK)</option>
-            <option>English (US)</option>
-            <option>Hindi</option>
-        </select>
-    </div>
+<!-- RHK Logo -->
+<div class="logo">
 
-    <!-- Logo -->
-    <div class="logo-box">
-        <div class="logo-circle">
-            <h1>RHK</h1>
-        </div>
-    </div>
+<div class="logo-circle">
 
-    <!-- Login Form -->
-    <div class="login-box">
-
-        <input
-            type="text"
-            id="email"
-            placeholder="Username, email address or mobile number">
-
-        <input
-            type="password"
-            id="password"
-            placeholder="Password">
-
-        <button id="loginBtn">
-            Log in
-        </button>
-
-        <a href="#" id="forgotPassword">
-            Forgotten password?
-        </a>
-
-    </div>
-
-    <!-- Bottom -->
-    <div class="bottom">
-
-        <button id="createAccount">
-            Create new account
-        </button>
-
-        <div class="meta">
-            <span>∞</span>
-            <p>Meta</p>
-        </div>
-
-    </div>
+<span>RHK</span>
 
 </div>
 
-<!-- Firebase -->
+</div>
+
+<div class="login-box">
+
+<input
+type="text"
+id="email"
+placeholder="Username, email address or mobile number">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button id="loginBtn">
+Log in
+</button>
+
+<p id="error"></p>
+
+</div>
+
+<div class="forgot">
+<a href="#">Forgotten password?</a>
+</div>
+
+<div class="bottom">
+
+<button id="signupBtn">
+Create new account
+</button>
+
+</div>
+
+<div class="meta">
+
+<div class="meta-line"></div>
+
+<span>RHK</span>
+
+<div class="meta-line"></div>
+
+</div>
+
+</div>
+
 <script type="module" src="script.js"></script>
 
 </body>
