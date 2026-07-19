@@ -1,166 +1,98 @@
-// ==========================
-// Firebase Imports
-// ==========================
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-
 import {
-    getAuth,
-    signInWithEmailAndPassword,
-    sendPasswordResetEmail,
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+signInWithEmailAndPassword,
+sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-import {
-    getFirestore,
-    doc,
-    getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+const auth = window.auth;
 
-
-// ==========================
-// Firebase Config
-// ==========================
-const firebaseConfig = {
-    apiKey: "AIzaSyAHUju18VBAdDFoQJhsVWp7oUqBxhfwThE",
-    authDomain: "rhk-app-e34c6.firebaseapp.com",
-    projectId: "rhk-app-e34c6",
-    storageBucket: "rhk-app-e34c6.firebasestorage.app",
-    messagingSenderId: "1016565109006",
-    appId: "1:1016565109006:web:eb7ec260a601a16e5ac75f",
-    measurementId: "G-814PTRRQVQ"
-};
-
-
-// ==========================
-// Initialize Firebase
-// ==========================
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-
-// ==========================
-// HTML Elements
-// ==========================
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-
+const email = document.getElementById("email");
+const password = document.getElementById("password");
 const loginBtn = document.getElementById("loginBtn");
-const forgotPassword = document.getElementById("forgotPassword");
-const createAccount = document.getElementById("createAccount");
+const signupBtn = document.getElementById("signupBtn");
+const error = document.getElementById("error");
 
-
-// ==========================
 // Login
-// ==========================
-loginBtn.addEventListener("click", async () => {
+loginBtn.addEventListener("click", () => {
 
-    let loginValue = emailInput.value.trim().toLowerCase();
-    let password = passwordInput.value.trim();
+const userEmail = email.value.trim();
+const userPassword = password.value.trim();
 
-    if (loginValue === "" || password === "") {
-        alert("Please fill all fields.");
-        return;
-    }
+if(userEmail === "" || userPassword === ""){
+error.innerHTML = "Please fill all fields.";
+return;
+}
 
-    try {
+signInWithEmailAndPassword(auth, userEmail, userPassword)
 
-        let email = loginValue;
+.then((userCredential)=>{
 
-        // If user entered username instead of email
-        if (!loginValue.includes("@")) {
+error.style.color="green";
+error.innerHTML="Login Successful";
 
-            const usernameDoc =
-                await getDoc(doc(db, "usernames", loginValue));
+setTimeout(()=>{
+window.location.href="home.html";
+},1000);
 
-            if (!usernameDoc.exists()) {
-                alert("Username not found.");
-                return;
-            }
+})
 
-            email = usernameDoc.data().email;
-        }
+.catch((err)=>{
 
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
+error.style.color="red";
 
-        alert("Welcome to RHK!");
+switch(err.code){
 
-        window.location.href = "home.html";
+case "auth/invalid-email":
+error.innerHTML="Invalid email.";
+break;
 
-    } catch (error) {
+case "auth/user-not-found":
+error.innerHTML="User not found.";
+break;
 
-        alert(error.message);
+case "auth/wrong-password":
+error.innerHTML="Wrong password.";
+break;
 
-    }
+case "auth/invalid-credential":
+error.innerHTML="Invalid email or password.";
+break;
+
+default:
+error.innerHTML=err.message;
+
+}
 
 });
 
+});
 
-// ==========================
 // Forgot Password
-// ==========================
-forgotPassword.addEventListener("click", async (e) => {
+document.querySelector(".forgot a").addEventListener("click",(e)=>{
 
-    e.preventDefault();
+e.preventDefault();
 
-    let loginValue = emailInput.value.trim().toLowerCase();
+const userEmail=email.value.trim();
 
-    if (loginValue === "") {
-        alert("Enter your email.");
-        return;
-    }
+if(userEmail===""){
+alert("Enter your email first.");
+return;
+}
 
-    try {
+sendPasswordResetEmail(auth,userEmail)
 
-        if (!loginValue.includes("@")) {
+.then(()=>{
+alert("Password reset email sent.");
+})
 
-            const usernameDoc =
-                await getDoc(doc(db, "usernames", loginValue));
-
-            if (!usernameDoc.exists()) {
-                alert("Username not found.");
-                return;
-            }
-
-            loginValue = usernameDoc.data().email;
-        }
-
-        await sendPasswordResetEmail(auth, loginValue);
-
-        alert("Password reset email sent.");
-
-    } catch (error) {
-
-        alert(error.message);
-
-    }
+.catch((err)=>{
+alert(err.message);
+});
 
 });
 
-
-// ==========================
 // Create Account
-// ==========================
-createAccount.addEventListener("click", () => {
+signupBtn.addEventListener("click",()=>{
 
-    window.location.href = "signup.html";
-
-});
-
-
-// ==========================
-// Auto Login
-// ==========================
-onAuthStateChanged(auth, (user) => {
-
-    if (user) {
-
-        window.location.href = "home.html";
-
-    }
+window.location.href="signup.html";
 
 });
